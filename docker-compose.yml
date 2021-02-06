@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  delivery-partner:
+    image: delivery-partner
+    build:
+      context: .
+    volumes:
+      - ".:/app"
+    ports:
+      - "80:80"
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_HOST=postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=delivery_partner
+    depends_on:
+      - postgres
+    networks:
+      - default
+
+  postgres:
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=delivery_partner
+    volumes:
+      - delivery_partner-postgres:/var/lib/postgresql:delegated
+
+networks:
+  default:
+    external:
+      name: local-network
+
+volumes:
+  delivery_partner-postgres:
