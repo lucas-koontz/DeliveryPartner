@@ -15,25 +15,20 @@ services:
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=postgres
       - DATABASE_NAME=delivery_partner
+      - LENIENT_ASSERTIONS=true
     depends_on:
       - postgres
     networks:
       - default
 
   postgres:
-    image: postgres:alpine
+    image: postgis/postgis:12-master
     restart: always
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=delivery_partner
-    volumes:
-      - delivery_partner-postgres:/var/lib/postgresql:delegated
 
 networks:
   default:
     external:
       name: local-network
-
-volumes:
-  delivery_partner-postgres:
