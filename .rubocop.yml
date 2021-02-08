@@ -18,6 +18,7 @@ Metrics/BlockLength:
     - "spec/**/*"
     - "config/**/*"
     - "Guardfile"
+    - "app/controllers/graphql_controller.rb"
 
   
 Layout/LineLength:
@@ -29,6 +30,8 @@ Layout/LineLength:
 
 Metrics/MethodLength:
   Max: 15
+  Exclude:
+    - "app/controllers/graphql_controller.rb"
 
 
 Layout/SpaceBeforeBrackets:

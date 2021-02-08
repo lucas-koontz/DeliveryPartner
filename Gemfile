@@ -24,6 +24,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.1.0'
   gem 'faker', '~> 2.15.1'
   gem 'pry-byebug', '~> 3.9.0'
+  gem 'rspec-graphql_matchers', '~> 1.3.0'
   gem 'rspec-rails', '~> 4.0.2'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
