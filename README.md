@@ -14,6 +14,49 @@
   - [License](#license)
   - [Code of Conduct](#code-of-conduct)
 
+
+banco de dados
+
+rake db:create
+rake db:gis:setup
+rake db:migrate
+
+
+Pontos ilha não permitidos
+
+ empty polygon withing a polygon.
+
+ pede pro usuário
+
+# square_with_hole.valid?
+# check if polygon is valid
+
+# RGeo::Error::InvalidGeometry (LinearRing failed ring test)
+
+
+ ENV VAR  LENIENT_ASSERTIONS
+[
+  -38.52955,
+  -3.76631
+],
+[
+  -38.53093,
+  -3.76639
+],
+[
+  -38.51856,
+  -3.76537
+],
+
+
+
+ID is UUID
+
+Document is unique
+
+
+
+
 # README
 
 This README would normally document whatever steps are necessary to get the
