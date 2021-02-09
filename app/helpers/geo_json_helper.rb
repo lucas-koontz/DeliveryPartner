@@ -8,6 +8,10 @@ module GeoJsonHelper
       RGeo::GeoJSON.decode(json, geo_factory: factory)
     end
 
+    def encode(rgeo_object:)
+      RGeo::GeoJSON.encode(rgeo_object)
+    end
+
     private
 
     def factory

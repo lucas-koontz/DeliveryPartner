@@ -6,7 +6,7 @@ module Partners
       class PointInputType < ::Types::BaseInputObject
         description 'Geographic Point Input'
 
-        argument :type, Types::Enums::PointEnum, required: true
+        argument :type, String, required: true
         argument :coordinates, Types::CoordinateType, required: true
       end
     end

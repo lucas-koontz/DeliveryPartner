@@ -9,11 +9,15 @@ module Partners
 
       field :partner, Partners::Types::PartnerType, null: false
 
-      def resolve(partner:)
-        params = Hash partner
-        params[:id] = 1
+      def resolve(**args)
+        payload = Hash args[:partner]
 
-        { partner: params }
+        Partners::CreatePartnerService.call(payload: payload)
+      rescue ActiveRecord::RecordInvalid => e
+        GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}:"\
+          " #{e.record.errors.full_messages.join(', ')}")
+      rescue Partners::Errors::InvalidGeographicalFeatureError => e
+        GraphQL::ExecutionError.new("Invalid Geographic Feature: #{e.message}")
       end
     end
   end

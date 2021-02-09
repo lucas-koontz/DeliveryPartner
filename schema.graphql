@@ -48,14 +48,7 @@ Geographic MultiPolygon entity
 """
 type MultiPolygon {
   coordinates: [[[Coordinate!]!]!]!
-  type: MultiPolygonEnum!
-}
-
-enum MultiPolygonEnum {
-  """
-  GeoJSON MultiPolygon
-  """
-  MultiPolygon
+  type: String!
 }
 
 """
@@ -63,7 +56,7 @@ Geographic MultiPolygon Input
 """
 input MultiPolygonInput {
   coordinates: [[[Coordinate!]!]!]!
-  type: MultiPolygonEnum!
+  type: String!
 }
 
 type Mutation {
@@ -113,14 +106,7 @@ Geographic Point entity
 """
 type Point {
   coordinates: Coordinate!
-  type: PointEnum!
-}
-
-enum PointEnum {
-  """
-  GeoJSON Point
-  """
-  Point
+  type: String!
 }
 
 """
@@ -128,7 +114,7 @@ Geographic Point Input
 """
 input PointInput {
   coordinates: Coordinate!
-  type: PointEnum!
+  type: String!
 }
 
 type Query {

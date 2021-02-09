@@ -5,7 +5,7 @@ module Partners
     class MultiPolygonType < ::Types::BaseObject
       description 'Geographic MultiPolygon entity'
 
-      field :type, Types::Enums::MultiPolygonEnum, null: false
+      field :type, String, null: false
       field :coordinates, [[[Types::CoordinateType]]], null: false
     end
   end

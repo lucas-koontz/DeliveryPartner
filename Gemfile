@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
+gem 'active_model_serializers', '~> 0.10.12'
 gem 'activerecord-postgis-adapter', '~> 7.0.1'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cpf_cnpj', '~> 0.5.0'

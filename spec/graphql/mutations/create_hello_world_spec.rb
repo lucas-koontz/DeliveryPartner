@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'support/graphql_helpers'
 
 RSpec.describe Mutations::CreateHelloWorld do
-  it 'should return a message' do
+  it 'returns a message' do
     mutation_string = <<-MUTATION
       mutation {
         createHelloWorld(input: { name: "Harry Potter" }) {

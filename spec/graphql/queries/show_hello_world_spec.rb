@@ -10,7 +10,7 @@ RSpec.describe Queries::ShowHelloWorld do
     }
   end
 
-  it 'should return a message ' do
+  it 'returns a message ' do
     query_string = <<-QUERY
       query {
         showHelloWorld(name: "Harry Potter") {

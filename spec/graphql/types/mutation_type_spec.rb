@@ -11,7 +11,7 @@ RSpec.describe Types::MutationType do
   end
 
   describe 'createHelloWorld field' do
-    it 'should resolve with the right function' do
+    it 'resolves with the right function' do
       resolver = subject.fields['createHelloWorld'].mutation
 
       expect(resolver).to equal Mutations::CreateHelloWorld
@@ -19,7 +19,7 @@ RSpec.describe Types::MutationType do
   end
 
   describe 'createPartner field' do
-    it 'should resolve with the right function' do
+    it 'resolves with the right function' do
       resolver = subject.fields['createPartner'].mutation
 
       expect(resolver).to equal Partners::Mutations::CreatePartner

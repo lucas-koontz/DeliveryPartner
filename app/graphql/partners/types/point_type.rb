@@ -5,7 +5,7 @@ module Partners
     class PointType < ::Types::BaseObject
       description 'Geographic Point entity'
 
-      field :type, Types::Enums::PointEnum, null: false
+      field :type, String, null: false
       field :coordinates, Types::CoordinateType, null: false
     end
   end

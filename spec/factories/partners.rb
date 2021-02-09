@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :partner do
+    id { Faker::Internet.uuid }
     trading_name { Faker::Movies::HarryPotter.location }
     owner_name { Faker::Movies::HarryPotter.character }
     document { CNPJ.generate }
