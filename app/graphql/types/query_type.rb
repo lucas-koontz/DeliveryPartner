@@ -10,5 +10,6 @@ module Types
     field :showHelloWorld, resolver: Queries::ShowHelloWorld
 
     # Partner
+    field :retrievePartner, resolver: Partners::Queries::RetrievePartner
   end
 end

@@ -10,6 +10,10 @@ RSpec.describe Queries::ShowHelloWorld do
     }
   end
 
+  describe 'arguments' do
+    it { expect(described_class.arguments['name'].type.to_type_signature).to eq 'String!' }
+  end
+
   it 'returns a message ' do
     query_string = <<-QUERY
       query {

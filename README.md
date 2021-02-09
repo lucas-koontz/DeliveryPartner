@@ -101,7 +101,9 @@ Save in a database a partner defined by **all** the fields represented by the JS
 
 #### Solution 
 
-In order to create a new partner, you
+In order to create a new partner, you can use `createPartner` mutation.
+
+*Example*:
 
 ```graphql
 mutation {
@@ -128,6 +130,30 @@ mutation {
 ### 1.2. Load partner by id:
 Return a specific partner by its `id` with all the fields presented above.
 #### Solution
+
+In order to create a new partner, you can use `retrievePartner` mutation.
+
+*Example*:
+
+```graphql
+query {
+  retrievePartner(id: "1") {
+    id
+    tradingName
+    ownerName
+    document
+    coverageArea {
+      type
+      coordinates
+    }
+    address {
+      type
+      coordinates
+    }
+  }
+}
+```
+
 ### 1.3. Search partner:
 Given a specific location (coordinates `long` and `lat`), search the **nearest** partner **which the coverage area includes** the location.
 #### Solution

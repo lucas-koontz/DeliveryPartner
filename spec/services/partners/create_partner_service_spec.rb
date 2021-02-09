@@ -37,10 +37,6 @@ RSpec.describe Partners::CreatePartnerService do
       }
     end
 
-    let(:partner) { create(:partner) }
-
-    let(:successful_response) { OpenStruct.new(parnter: PartnerSerializer.new(partner)) }
-
     it 'persists a partner' do
       expect do
         subject.call(payload: payload)

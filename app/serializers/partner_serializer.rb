@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PartnerSerializer < ActiveModel::Serializer
   attributes :id, :trading_name, :owner_name, :document, :coverage_area, :address
 
