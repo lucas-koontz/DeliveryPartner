@@ -1,7 +1,7 @@
 FROM ruby:2.7.2-alpine
 
 
-ARG PACKAGES="build-base libxslt-dev g++ gcc libxml2-dev make curl jq postgresql-dev tzdata git"
+ARG PACKAGES="build-base libxslt-dev g++ gcc libxml2-dev make curl jq postgresql-dev tzdata git geos geos-dev"
 ARG PORT=3000
 ARG WORKDIR=/app
 

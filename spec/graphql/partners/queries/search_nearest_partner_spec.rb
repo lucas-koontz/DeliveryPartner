@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'support/graphql_helpers'
 
-RSpec.describe Partners::Queries::RetrievePartner do
+RSpec.describe Partners::Queries::SearchNearestPartner do
   describe 'type' do
     it {
       expect(described_class.type).to eq Partners::Types::PartnerType
@@ -11,11 +11,15 @@ RSpec.describe Partners::Queries::RetrievePartner do
   end
 
   describe 'arguments' do
-    it { expect(described_class.arguments['id'].type.to_type_signature).to eq 'ID!' }
+    it { expect(described_class.arguments['lat'].type.to_type_signature).to eq 'Float!' }
+    it { expect(described_class.arguments['long'].type.to_type_signature).to eq 'Float!' }
   end
 
   describe '#resolve' do
     let(:id) { '1' }
+
+    let(:latitude) { -21.785741 }
+    let(:longitude) { -46.57421 }
 
     let(:partner_payload) do
       {
@@ -32,7 +36,7 @@ RSpec.describe Partners::Queries::RetrievePartner do
         },
         address: {
           type: 'Point',
-          coordinates: [-46.57421, -21.785741]
+          coordinates: [longitude, latitude]
         }
       }
     end
@@ -41,7 +45,7 @@ RSpec.describe Partners::Queries::RetrievePartner do
 
     let(:data) do
       {
-        retrievePartner: {
+        searchNearestPartner: {
           id: id,
           tradingName: 'Adega da Cerveja - Pinheiros',
           ownerName: 'Zé da Silva',
@@ -55,7 +59,7 @@ RSpec.describe Partners::Queries::RetrievePartner do
           },
           address: {
             type: 'Point',
-            coordinates: [-46.57421, -21.785741]
+            coordinates: [longitude, latitude]
           }
 
         }
@@ -71,7 +75,7 @@ RSpec.describe Partners::Queries::RetrievePartner do
     let(:query_string) do
       <<-QUERY
           query {
-            retrievePartner(id: "#{id}") {
+            searchNearestPartner(lat: #{latitude}, long: #{longitude}) {
               id
               tradingName
               ownerName
@@ -90,41 +94,22 @@ RSpec.describe Partners::Queries::RetrievePartner do
     end
 
     before do
-      allow(Partners::RetrievePartnerService).to receive(:call)
-        .with(id: id)
+      allow(Partners::SearchNearestPartnerService).to receive(:call)
+        .with(latitude: latitude, longitude: longitude)
         .and_return(service_reponse)
     end
 
-    it 'returns a  partner' do
+    it 'returns the nearest partner in the coverage area' do
       query_result = DeliveryPartnerSchema.execute(query_string)
       response = graphql_response(query_result)
       expect(response).to eq(query_response)
     end
 
     context 'failure' do
-      let(:partner) { create(:partner) }
-
-      describe 'invalid record' do
-        before do
-          allow(Partners::RetrievePartnerService).to receive(:call)
-            .with(id: id)
-            .and_raise(ActiveRecord::RecordInvalid.new(partner))
-        end
-
-        it 'returns an invalid attributes error' do
-          expect(GraphQL::ExecutionError).to receive(:new).once.and_call_original
-
-          query_result = DeliveryPartnerSchema.execute(query_string)
-          response = graphql_response(query_result)
-
-          expect(response[:errors]).to be_truthy
-        end
-      end
-
       describe 'record not found' do
         before do
-          allow(Partners::RetrievePartnerService).to receive(:call)
-            .with(id: id)
+          allow(Partners::SearchNearestPartnerService).to receive(:call)
+            .with(latitude: latitude, longitude: longitude)
             .and_raise(ActiveRecord::RecordNotFound)
         end
 

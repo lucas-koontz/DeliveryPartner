@@ -11,5 +11,6 @@ module Types
 
     # Partner
     field :retrievePartner, resolver: Partners::Queries::RetrievePartner
+    field :searchNearestPartner, resolver: Partners::Queries::SearchNearestPartner
   end
 end

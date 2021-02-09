@@ -157,6 +157,36 @@ query {
 ### 1.3. Search partner:
 Given a specific location (coordinates `long` and `lat`), search the **nearest** partner **which the coverage area includes** the location.
 #### Solution
+
+
+
+In order to retrieve the nearest existing partner that its coverage area covers a location, you can use `searchNearestPartner` query.
+
+*Example*:
+
+```graphql
+query { 
+  searchNearestPartner(lat: -21.785741, long: -46.57421) {
+    id
+    tradingName
+    ownerName
+    document
+    coverageArea {
+      type
+      coordinates
+    }
+    address {
+      type
+      coordinates
+    }
+  }
+}
+```
+
+Our search service uses [PostGIS](https://postgis.net/) commands to use geographic functions.
+- `ST_DISTANCE` to measure distance between two geographic points.
+- `ST_Intersects` to verify a intersection. In this case, we use to verify if a coverage area intersects a location.
+
 ### 1.4. Technical Requirements:
 * The programming language and the database engine are entirely up to you;
 #### Solution

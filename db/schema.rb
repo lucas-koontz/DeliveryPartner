@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20_210_206_204_242) do
     t.string 'trading_name', null: false
     t.string 'owner_name', null: false
     t.string 'document', null: false
-    t.geometry 'coverage_area', limit: { srid: 0, type: 'multi_polygon' }, null: false
-    t.geometry 'address', limit: { srid: 0, type: 'st_point' }, null: false
+    t.geography 'coverage_area', limit: { srid: 4326, type: 'multi_polygon', geographic: true }, null: false
+    t.geography 'address', limit: { srid: 4326, type: 'st_point', geographic: true }, null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['document'], name: 'index_partners_on_document', unique: true
