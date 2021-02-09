@@ -1,0 +1,24 @@
+name: Docker
+
+on: [push,pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup-docker
+      uses: docker-practice/actions-setup-docker@1.0.4
+    - name: Build Image
+      run: |
+        docker network create local-network
+        docker-compose build
+    - name: Database Setup
+      run: |
+        docker-compose run delivery-partner rake db:create db:gis:setup db:migrate
+    - name: Code sniffer
+      run: |
+        docker-compose run delivery-partner rubocop
+    - name: Tests
+      run: |
+        docker-compose run delivery-partner rspec

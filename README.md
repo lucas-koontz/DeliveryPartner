@@ -1,6 +1,6 @@
 # Delivery Partner
 
-[![Actions Status](https://github.com/lucasfernand-es/DeliveryPartner/workflows/Ruby/badge.svg)](https://github.com/lucasfernand-es/DeliveryPartner/actions)
+[![Actions Status](https://github.com/lucasfernand-es/DeliveryPartner/workflows/Docker/badge.svg)](https://github.com/lucasfernand-es/DeliveryPartner/actions)
 
 ## Table of Contents
   - [Scenario](#scenario)
