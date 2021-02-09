@@ -149,6 +149,7 @@ RSpec.describe Partners::Mutations::CreatePartner do
           expect(response[:errors]).to be_truthy
         end
       end
+
       describe 'invalid geographical feature' do
         before do
           allow(Partners::CreatePartnerService).to receive(:call)

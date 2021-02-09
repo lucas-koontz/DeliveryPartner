@@ -122,5 +122,10 @@ type Query {
   Retrieves a parnter
   """
   retrievePartner(id: ID!): Partner
+
+  """
+  Search nearest partner
+  """
+  searchNearestPartner(lat: Float!, long: Float!): Partner
   showHelloWorld(name: String!): HelloWorld
 }

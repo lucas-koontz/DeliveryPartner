@@ -6,8 +6,8 @@ class CreatePartners < ActiveRecord::Migration[6.1]
       t.string :trading_name, null: false
       t.string :owner_name, null: false
       t.string :document, null: false
-      t.multi_polygon :coverage_area, null: false
-      t.st_point :address, null: false
+      t.multi_polygon :coverage_area, null: false, geographic: true
+      t.st_point :address, null: false, geographic: true
 
       t.timestamps
 
