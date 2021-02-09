@@ -118,5 +118,9 @@ input PointInput {
 }
 
 type Query {
+  """
+  Retrieves a parnter
+  """
+  retrievePartner(id: ID!): Partner
   showHelloWorld(name: String!): HelloWorld
 }

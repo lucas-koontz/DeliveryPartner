@@ -5,6 +5,7 @@ module Partners
     attr_reader :payload
 
     def initialize(payload:)
+      super()
       @payload = payload
     end
 

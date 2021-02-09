@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec::Matchers.alias_matcher :increment, :change do |desc|
   desc.gsub('changed', 'incremented').gsub('change', 'increment')
 end

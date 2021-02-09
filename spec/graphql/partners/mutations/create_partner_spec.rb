@@ -100,16 +100,16 @@ RSpec.describe Partners::Mutations::CreatePartner do
               }
               }) {
             partner {
-              id,
-              tradingName,
-              ownerName,
-              document,
-              address {
-                type,
+              id
+              tradingName
+              ownerName
+              document
+              coverageArea {
+                type
                 coordinates
               }
-              coverageArea {
-                type,
+              address {
+                type
                 coordinates
               }
             }
@@ -132,7 +132,6 @@ RSpec.describe Partners::Mutations::CreatePartner do
 
     context 'failure' do
       let(:partner) { create(:partner) }
-
 
       describe 'invalid record' do
         before do
