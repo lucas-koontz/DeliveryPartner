@@ -2,73 +2,59 @@
 
 [![Actions Status](https://github.com/lucasfernand-es/DeliveryPartner/workflows/Docker/badge.svg)](https://github.com/lucasfernand-es/DeliveryPartner/actions)
 
+
+API to search nearest partner to a location.
+
 ## Table of Contents
+
+- [Delivery Partner](#delivery-partner)
+  - [Table of Contents](#table-of-contents)
   - [Scenario](#scenario)
-  - [Installation](#installation)
-  - [How to Run](#how-to-run)
-  - [Usage](#usage)
-    - [DealerRater](#dealerrater)
-  - [Examples](#examples)
-  - [Test](#test)
+  - [Challenge](#challenge)
+    - [1.1. Create a partner:](#11-create-a-partner)
+      - [Solution](#solution)
+    - [1.2. Load partner by id:](#12-load-partner-by-id)
+      - [Solution](#solution-1)
+    - [1.3. Search partner:](#13-search-partner)
+      - [Solution](#solution-2)
+    - [1.4. Technical Requirements:](#14-technical-requirements)
+      - [Solution](#solution-3)
+      - [Solution](#solution-4)
+      - [Solution](#solution-5)
   - [Contributing](#contributing)
   - [License](#license)
   - [Code of Conduct](#code-of-conduct)
+  - [TODO](#todo)
 
 
-banco de dados
+## Scenario
 
-rake db:create
-rake db:gis:setup
-rake db:migrate
-
-
-Pontos ilha não permitidos
-
- empty polygon withing a polygon.
-
- pede pro usuário
-
-# square_with_hole.valid?
-# check if polygon is valid
-
-# RGeo::Error::InvalidGeometry (LinearRing failed ring test)
-
-
- ENV VAR  LENIENT_ASSERTIONS
-[
-  -38.52955,
-  -3.76631
-],
-[
-  -38.53093,
-  -3.76639
-],
-[
-  -38.51856,
-  -3.76537
-],
-
-
-
-ID is UUID
-
-Document is unique
-
-TODO 
-
-Validar document?
-
-
-RGeo::GeoJSON takes care of invalid values
-
-
-
+In Zé we thrive to find our best partner to deliver beverages to our customers, providing the best and fastest service. To achieve this our compute fleet deals with GIS objects all the time.
 ## Challenge
 
 This API was developed using  _GraphQL_, thus all features (available through `queries` and `mutations`) can be accesses through `http://localhost:3000/graphql`.
 
-
 Alternativaly, you can use `http://localhost:3000/graphiql` as a _GraphQL_ IDE.
+
+Due to the fact some polygons included in `spec/fixtures/pdvs.json` fails the ring test, this project is configures [RGeo](https://github.com/rgeo/rgeo) to use lenient assertions by default. This can be changed by modifying a environment variable (`LENIENT_ASSERTIONS`).
+
+To run this API, follow these instructions:
+- Build a image:
+```bash
+$ docker network create local-network
+$ docker-compose build
+$ docker-compose run delivery-partner rake db:create db:gis:setup db:migrate
+```
+
+- Setup database
+```
+$ docker-compose run delivery-partner rake db:create db:gis:setup db:migrate
+```
+
+- Start container:
+```bash
+$ docker-compose up
+```
 
 ### 1.1. Create a partner:
 
@@ -96,8 +82,9 @@ Save in a database a partner defined by **all** the fields represented by the JS
 1. The `address` field follows the `GeoJSON Point` format (https://en.wikipedia.org/wiki/GeoJSON);
 2. The `coverageArea` field follows the `GeoJSON MultiPolygon` format (https://en.wikipedia.org/wiki/GeoJSON);
 3. The `document` must be a unique field;
+   1. This project does not verify document or assume its type at this moment. (TODO)
 4. The `id` must be a unique field, but not necessarily an integer;
-
+   1. ID is a UUID by default.
 
 #### Solution 
 
@@ -126,12 +113,11 @@ mutation {
 }
 ```
 
-
 ### 1.2. Load partner by id:
 Return a specific partner by its `id` with all the fields presented above.
 #### Solution
 
-In order to create a new partner, you can use `retrievePartner` mutation.
+In order to retrieve an existing partner, you can use `retrievePartner` query.
 
 *Example*:
 
@@ -157,8 +143,6 @@ query {
 ### 1.3. Search partner:
 Given a specific location (coordinates `long` and `lat`), search the **nearest** partner **which the coverage area includes** the location.
 #### Solution
-
-
 
 In order to retrieve the nearest existing partner that its coverage area covers a location, you can use `searchNearestPartner` query.
 
@@ -190,34 +174,62 @@ Our search service uses [PostGIS](https://postgis.net/) commands to use geograph
 ### 1.4. Technical Requirements:
 * The programming language and the database engine are entirely up to you;
 #### Solution
+This API uses Ruby on Rails.
 
 * Your project must be **cross-platform**;
 #### Solution
+`Dockerfile` and `docker-compose.yml` specifies a Docker container version for this project. This API can be used in any plataform that offers Docker.
+
 
 * Provide a documentation (README.md) file explaining how to execute your service **locally** and how to deploy it (*focus on simplicity, and don't forget that we should test your service on our own, without further assistance*).
 #### Solution
 
-# README
+Instructions to run and deploy **locally**: 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+First, need to build a image and setup database,
+```bash
+$ docker network create local-network
+$ docker-compose build
+$ docker-compose run delivery-partner rake db:create db:gis:setup db:migrate
+```
+Then, just need to start a container
+```bash
+$ docker-compose up
+```
 
-Things you may want to cover:
+This application will be available in `http://localhost:3000/`.
 
-* Ruby version
+Since this API uses _GraphQL_, its only route is `http://localhost:3000/graphql`.
 
-* System dependencies
+Alternativaly, you can use `http://localhost:3000/graphiql` as a _GraphQL_ IDE.
 
-* Configuration
+Other commands:
 
-* Database creation
+- Linter: 
+```bash
+$ docker-compose run delivery-partner rubocop
+```
+- Tests:
+```bash
+$ docker-compose run delivery-partner rspec
+```
 
-* Database initialization
 
-* How to run the test suite
+## Contributing
 
-* Services (job queues, cache servers, search engines, etc.)
+Bug reports and pull requests are welcome on GitHub at https://github.com/lucasfernand-es/deliverypartner. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/lucasfernand-es/deliverypartner/blob/master/CODE_OF_CONDUCT.md).
 
-* Deployment instructions
 
-* ...
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+
+Everyone interacting in the ReviewScraper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/deliverypartner/blob/master/CODE_OF_CONDUCT.md).
+
+
+## TODO
+
+- Define document and add validation.
+- Add test scenarios.
