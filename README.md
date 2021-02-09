@@ -11,13 +11,13 @@ API to search nearest partner to a location.
   - [Table of Contents](#table-of-contents)
   - [Scenario](#scenario)
   - [Challenge](#challenge)
-    - [1.1. Create a partner:](#11-create-a-partner)
+    - [1.1. Create a partner](#11-create-a-partner)
       - [Solution](#solution)
-    - [1.2. Load partner by id:](#12-load-partner-by-id)
+    - [1.2. Load partner by id](#12-load-partner-by-id)
       - [Solution](#solution-1)
-    - [1.3. Search partner:](#13-search-partner)
+    - [1.3. Search partner](#13-search-partner)
       - [Solution](#solution-2)
-    - [1.4. Technical Requirements:](#14-technical-requirements)
+    - [1.4. Technical Requirements](#14-technical-requirements)
       - [Solution](#solution-3)
       - [Solution](#solution-4)
       - [Solution](#solution-5)
@@ -56,7 +56,7 @@ $ docker-compose run delivery-partner rake db:create db:gis:setup db:migrate
 $ docker-compose up
 ```
 
-### 1.1. Create a partner:
+### 1.1. Create a partner
 
 Save in a database a partner defined by **all** the fields represented by the JSON and rules below:
 ```json
@@ -113,7 +113,7 @@ mutation {
 }
 ```
 
-### 1.2. Load partner by id:
+### 1.2. Load partner by id
 Return a specific partner by its `id` with all the fields presented above.
 #### Solution
 
@@ -140,7 +140,7 @@ query {
 }
 ```
 
-### 1.3. Search partner:
+### 1.3. Search partner
 Given a specific location (coordinates `long` and `lat`), search the **nearest** partner **which the coverage area includes** the location.
 #### Solution
 
@@ -171,7 +171,7 @@ Our search service uses [PostGIS](https://postgis.net/) commands to use geograph
 - `ST_DISTANCE` to measure distance between two geographic points.
 - `ST_Intersects` to verify a intersection. In this case, we use to verify if a coverage area intersects a location.
 
-### 1.4. Technical Requirements:
+### 1.4. Technical Requirements
 * The programming language and the database engine are entirely up to you;
 #### Solution
 This API uses Ruby on Rails.
