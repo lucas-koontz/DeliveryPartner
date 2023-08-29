@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: setup-docker
-      uses: docker-practice/actions-setup-docker@1.0.4
+      uses: docker-practice/actions-setup-docker@master
     - name: Build Image
       run: |
         docker network create local-network
