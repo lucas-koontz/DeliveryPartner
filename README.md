@@ -1,9 +1,9 @@
 # Delivery Partner
 
-[![Actions Status](https://github.com/lucasfernand-es/DeliveryPartner/workflows/Docker/badge.svg)](https://github.com/lucasfernand-es/DeliveryPartner/actions)
+[![Actions Status](https://github.com/lucas-koontz/DeliveryPartner/workflows/Docker/badge.svg)](https://github.com/lucasfernand-es/DeliveryPartner/actions)
 
 
-API to search nearest partner to a location.
+API to search for the nearest partner to a location.
 
 ## Table of Contents
 
@@ -29,17 +29,18 @@ API to search nearest partner to a location.
 
 ## Scenario
 
-In Zé we thrive to find our best partner to deliver beverages to our customers, providing the best and fastest service. To achieve this our compute fleet deals with GIS objects all the time.
+In Joe Doe's beverages, we strive to find the best partner to deliver beverages to our customers, providing the best and fastest service. To achieve this our compute fleet deals with GIS objects all the time.
+
 ## Challenge
 
-This API was developed using  _GraphQL_, thus all features (available through `queries` and `mutations`) can be accesses through `http://localhost:3000/graphql`.
+This API was developed using  _GraphQL_, thus all features (available through `queries` and `mutations`) can be accessed through `http://localhost:3000/graphql`.
 
-Alternativaly, you can use `http://localhost:3000/graphiql` as a _GraphQL_ IDE.
+Alternatively, you can use `http://localhost:3000/graphiql` as a _GraphQL_ IDE.
 
-Due to the fact some polygons included in `spec/fixtures/pdvs.json` fails the ring test, this project is configures [RGeo](https://github.com/rgeo/rgeo) to use lenient assertions by default. This can be changed by modifying a environment variable (`LENIENT_ASSERTIONS`).
+Due to the fact some polygons included in `spec/fixtures/pdvs.json` fail the ring test, this project is configured [RGeo](https://github.com/rgeo/rgeo) to use lenient assertions by default. This can be changed by modifying an environment variable (`LENIENT_ASSERTIONS`).
 
 To run this API, follow these instructions:
-- Build a image:
+- Build an image:
 ```bash
 $ docker network create local-network
 $ docker-compose build
@@ -82,7 +83,7 @@ Save in a database a partner defined by **all** the fields represented by the JS
 1. The `address` field follows the `GeoJSON Point` format (https://en.wikipedia.org/wiki/GeoJSON);
 2. The `coverageArea` field follows the `GeoJSON MultiPolygon` format (https://en.wikipedia.org/wiki/GeoJSON);
 3. The `document` must be a unique field;
-   1. This project does not verify document or assume its type at this moment. (TODO)
+   1. This project does not verify the document or assume its type at this moment. (TODO)
 4. The `id` must be a unique field, but not necessarily an integer;
    1. ID is a UUID by default.
 
@@ -113,7 +114,7 @@ mutation {
 }
 ```
 
-### 1.2. Load partner by id
+### 1.2. Load partner by ID
 Return a specific partner by its `id` with all the fields presented above.
 #### Solution
 
@@ -168,8 +169,8 @@ query {
 ```
 
 Our search service uses [PostGIS](https://postgis.net/) commands to use geographic functions.
-- `ST_DISTANCE` to measure distance between two geographic points.
-- `ST_Intersects` to verify a intersection. In this case, we use to verify if a coverage area intersects a location.
+- `ST_DISTANCE` to measure the distance between two geographic points.
+- `ST_Intersects` to verify an intersection. In this case, we use it to verify if a coverage area intersects a location.
 
 ### 1.4. Technical Requirements
 * The programming language and the database engine are entirely up to you;
@@ -178,7 +179,7 @@ This API uses Ruby on Rails.
 
 * Your project must be **cross-platform**;
 #### Solution
-`Dockerfile` and `docker-compose.yml` specifies a Docker container version for this project. This API can be used in any plataform that offers Docker.
+`Dockerfile` and `docker-compose.yml` specify a Docker container version for this project. This API can be used in any platform that offers Docker.
 
 
 * Provide a documentation (README.md) file explaining how to execute your service **locally** and how to deploy it (*focus on simplicity, and don't forget that we should test your service on our own, without further assistance*).
@@ -186,7 +187,7 @@ This API uses Ruby on Rails.
 
 Instructions to run and deploy **locally**: 
 
-First, need to build a image and setup database,
+First, need to build an image and set up database,
 ```bash
 $ docker network create local-network
 $ docker-compose build
@@ -201,7 +202,7 @@ This application will be available in `http://localhost:3000/`.
 
 Since this API uses _GraphQL_, its only route is `http://localhost:3000/graphql`.
 
-Alternativaly, you can use `http://localhost:3000/graphiql` as a _GraphQL_ IDE.
+Alternatively, you can use `http://localhost:3000/graphiql` as a _GraphQL_ IDE.
 
 Other commands:
 
@@ -217,7 +218,7 @@ $ docker-compose run delivery-partner rspec
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/lucasfernand-es/deliverypartner. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/lucasfernand-es/deliverypartner/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/lucasfernand-es/deliverypartner. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/lucas-koontz/deliverypartner/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## License
@@ -226,10 +227,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the ReviewScraper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/deliverypartner/blob/master/CODE_OF_CONDUCT.md).
-
-
-## TODO
-
-- Define document and add validation.
-- Add test scenarios.
+Everyone interacting in the Delivery Partner project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/lucas-koontz/deliverypartner/blob/master/CODE_OF_CONDUCT.md).
