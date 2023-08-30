@@ -101,7 +101,7 @@ RSpec.describe GeoJsonHelper do
     factory.multi_polygon([polygon])
   end
 
-  let(:lenient_assertions) { ENV['LENIENT_ASSERTIONS'] }
+  let(:lenient_assertions) { ENV.fetch('LENIENT_ASSERTIONS', nil) }
 
   let(:factory) do
     RGeo::Geographic.spherical_factory(uses_lenient_assertions: lenient_assertions)
@@ -116,7 +116,7 @@ RSpec.describe GeoJsonHelper do
       end
     end
 
-    context 'deconding a multi polygon' do
+    context 'when deconding a multi polygon' do
       it 'returns a geographic polygon' do
         expect(
           subject.decode(json: multi_polygon.to_json)
