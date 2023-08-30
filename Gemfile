@@ -11,6 +11,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cpf_cnpj', '~> 0.5.0'
 gem 'graphql', '~> 1.12.3'
 gem 'jbuilder', '~> 2.7'
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f' # Version 0.3.5 was yanked. Reference: https://stackoverflow.com/questions/66919504/your-bundle-is-locked-to-mimemagic-0-3-5-but-that-version-could-not-be-found
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.1'

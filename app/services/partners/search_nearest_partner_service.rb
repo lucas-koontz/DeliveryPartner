@@ -19,9 +19,7 @@ module Partners
 
       partner = containing_partners.first
 
-      unless partner.present?
-        raise ActiveRecord::RecordNotFound, 'Unable to find a partner in that area.'
-      end
+      raise ActiveRecord::RecordNotFound, 'Unable to find a partner in that area.' if partner.blank?
 
       output(PartnerSerializer.new(partner))
     end

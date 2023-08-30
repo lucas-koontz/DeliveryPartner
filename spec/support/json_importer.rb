@@ -3,7 +3,7 @@
 module JsonImporter
   class << self
     def import_fixture(name)
-      JSON.parse(File.read(Rails.root.join('spec', 'fixtures', name))).deep_symbolize_keys
+      JSON.parse(Rails.root.join('spec', 'fixtures', name).read).deep_symbolize_keys
     end
   end
 end
